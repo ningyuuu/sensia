@@ -8,7 +8,7 @@ const positions = [
         problem: {
             text: `I'm bored...`, 
             selections: [
-                { choice: 'Pack of cards for you!', points: 30 },
+                { choice: 'SIA player cards for you!', points: 30 },
                 { choice: `Life's boring :(`, points: -10 },
             ]
         }
@@ -17,10 +17,10 @@ const positions = [
         x: 420, 
         y: 210, 
         problem: {
-            text: 'lol', 
+            text: `I'm thirsty...`, 
             selections: [
-                { choice: 'wattt', points: 20 },
-                { choice: 'heyyyy', points: 30 },
+                { choice: 'Can I get you a drink?', points: 30 },
+                { choice: 'You want water?', points: 10 },
             ]
         }
     },
@@ -28,10 +28,11 @@ const positions = [
         x: 220, 
         y: 100, 
         problem: {
-            text: 'lol', 
+            text: 'This guy beside me is snoring loudly, I cannot fall asleep.', 
             selections: [
-                { choice: 'wattt', points: 20 },
-                { choice: 'heyyyy', points: 30 },
+                { choice: 'Let me find you another seat', points: 20 },
+                { choice: 'Would you like earplugs?', points: 10 },
+                { choice: 'Let me go wake him up ok?', points: -10 },
             ]
         }
     },
@@ -39,10 +40,10 @@ const positions = [
         x: 470, 
         y: 230, 
         problem: {
-            text: 'lol', 
+            text: 'I wanna party! Get me drinks!!!!', 
             selections: [
-                { choice: 'wattt', points: 20 },
-                { choice: 'heyyyy', points: 30 },
+                { choice: `Oh yeah let's party!!`, points: -10 },
+                { choice: 'Sir please control yourself', points: 0 },
             ]
         }
     }
@@ -150,7 +151,7 @@ const play = {
 
     createOption: function(problem, text, score, order) {
         const btn = this.add.button(216, 250+order*60, 'option', () => this.executeOption(problem, score), this);
-        const txt = this.add.text(230, 255+order*60, text);
+        const txt = this.add.text(230, 255+order*60, text, {fill: 'white'});
         problem.add(btn);
         problem.add(txt);
     },
