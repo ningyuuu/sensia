@@ -3,8 +3,8 @@ var problems, dialogue;
 
 const positions = [
     {
-        x: 100, 
-        y: 330, 
+        x: 45, 
+        y: 305, 
         problem: {
             text: `I'm bored...`, 
             selections: [
@@ -14,8 +14,8 @@ const positions = [
         }
     },
     {
-        x: 420, 
-        y: 210, 
+        x: 433, 
+        y: 235, 
         problem: {
             text: `I'm thirsty...`, 
             selections: [
@@ -26,9 +26,10 @@ const positions = [
     },
     {
         x: 220, 
-        y: 100, 
+        y: 230, 
         problem: {
-            text: 'This guy beside me is snoring loudly, I cannot fall asleep.', 
+            text: `This guy beside me is snoring 
+loudly, I cannot fall asleep.`, 
             selections: [
                 { choice: 'Let me find you another seat', points: 20 },
                 { choice: 'Would you like earplugs?', points: 10 },
@@ -37,13 +38,14 @@ const positions = [
         }
     },
     {
-        x: 470, 
+        x: 650, 
         y: 230, 
         problem: {
             text: 'I wanna party! Get me drinks!!!!', 
             selections: [
-                { choice: `Oh yeah let's party!!`, points: -10 },
+                { choice: `Oh yeah let's party!!`, points: -100 },
                 { choice: 'Sir please control yourself', points: 0 },
+                { choice: 'No, stop drinking', points: -10},
             ]
         }
     }
@@ -51,9 +53,9 @@ const positions = [
 
 const play = {
     preload: function() {
-        game.load.image('sky', './assets/sky.png');
-        game.load.image('start', './assets/diamond.png');
-        game.load.image('problem', './assets/star.png');
+        game.load.image('sky', './assets/play_bg.png');
+        game.load.image('start', './assets/startt.png');
+        game.load.image('problem', './assets/excl.png');
         game.load.image('option', './assets/option.png');
         game.load.image('dialogue', './assets/dialogue.png');
     },
@@ -67,7 +69,9 @@ const play = {
         dialogue = this.add.group();
 
         // creating a health bar
-        this.add.text(30, 20, "Satisfaction:");
+        this.add.text(30, 20, "Satisfaction:", {
+            fill: 'white'
+        });
         this.life = 100;
         this.bar = new HealthBar(this.game, {x: 330, y: 34, height: 30});
         this.bar.setPercent(this.life);
@@ -76,7 +80,7 @@ const play = {
         setInterval(() => this.decreaseLife(this.dec), 100);
 
         // start button
-        this.startButton = this.add.button(200, 200, 'start', this.startGame, this);
+        this.startButton = this.add.button(300, 200, 'start', this.startGame, this);
     },
 
     update: function() {
@@ -114,6 +118,7 @@ const play = {
         // create a dude here
         const pos = positions.shift();
         const but = this.add.button(pos.x, pos.y, 'problem', () => this.openProblem(pos.problem, but), this);
+        but.scale.setTo(0.5, 0.5);
         problems.add(but);
     },
 
@@ -127,7 +132,7 @@ const play = {
         const problem = this.add.group();
 
         const dial = this.add.sprite(190, 100, 'dialogue');
-        const question = this.add.text(290, 200, prob.text);
+        const question = this.add.text(290, 150, prob.text);
         problem.add(dial);
         problem.add(question);
 
@@ -144,7 +149,10 @@ const play = {
     gameOver: function() {
         problems.pendingDestroy = true;
         dialogue.pendingDestroy = true;
-        this.add.text(400, 200, "Game Over :(");
+        this.add.text(200, 200, "Game Over :(", {
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            font: 'bold 70pt Arial',
+        });
         this.dec = 0;
         this.life = 0;
     },

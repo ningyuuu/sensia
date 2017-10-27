@@ -15,6 +15,6 @@ const menu = {
 
     startScenes: function() {
         console.log('start scenes!');
-        this.state.start('play');
+        this.state.start('startScenes');
     }
 }
