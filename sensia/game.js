@@ -7,7 +7,7 @@ game.state.add('menu', menu);
 game.state.add('startScenes', startScenes);
 game.state.add('play', play);
 
-game.state.start('play');
+game.state.start('menu');
 
 // function preload() {
 //     game.load.image('sky', 'assets/sky.png');
